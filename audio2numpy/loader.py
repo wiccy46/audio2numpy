@@ -1,9 +1,12 @@
 import numpy as np 
 import logging
 from .mp3dec import ffmpeg_available, FFmpegAudioFile
+from .wavdec import RawAudioFile
+from .exceptions import DecodeError, NoBackendError, AudioFormatError
 
 _LOGGER = logging.getLogger(__name__)
 _LOGGER.addHandler(logging.NullHandler())
+
 
 def _buf_to_float(x, n_bytes=2, dtype=np.float32):
     """Convert an integer buffer to floating point values.
@@ -31,25 +34,24 @@ def _buf_to_float(x, n_bytes=2, dtype=np.float32):
     # Rescale and format the data buffer
     return scale * np.frombuffer(x, fmt).astype(dtype)
 
-def available_backends():
-    """Returns a list of backends that are available on this system."""
-    # Standard-library WAV and AIFF readers.
-    ab = [RawAudioFile]
-    # Audioread also supports other backends such as coreaudio and gst. But 
-    # to simplify, we only use the standard library and ffmpeg. 
-    if ffmpeg_available():  # FFmpeg.
-        ab.append(FFmpegAudioFile)
-    return ab
 
 def _audio_read(path):
+    """Try to read audio file with back end one by one."""
     _LOGGER.debug("Audio read call.")
-    backends = available_backends()
-    for BackendClass in backends:
+    if path.endswith(".wav") or path.endswith(".aif"):
         try:
-            return BackendClass(path)
+            return RawAudioFile(path)
         except DecodeError:
             pass
-    raise NoBackendError()  # If all backends fails 
+    elif path.endswith(".mp3"):
+        try:
+            return FFmpegAudioFile(path)
+        except DecodeError:
+            pass
+    else:
+        raise AudioFormatError("Only support mp3, wav, aiff formats.")
+    raise NoBackendError()
+
 
 def audio_from_file(path, offset=0, duration=None, dtype=np.float32):
     '''Load an audio buffer using audioread.

@@ -1,7 +1,16 @@
 import subprocess
 import sys
 import threading
-from .exceptions import DecodeError, NoBackendError
+import os
+import time
+import re
+from .exceptions import DecodeError, NoBackendError, \
+    NotInstalledError, ReadTimeoutError, CommunicationError, \
+    DataError
+try:
+    import queue
+except ImportError:
+    import Queue as queue
 
 
 COMMANDS = ('ffmpeg', 'avconv')
@@ -39,6 +48,28 @@ def ffmpeg_available():
 # For Windows error switch management, we need a lock to keep the mode
 # adjustment atomic.
 windows_error_mode_lock = threading.Lock()
+
+
+# This part is for ffmpeg read. 
+class QueueReaderThread(threading.Thread):
+    """A thread that consumes data from a filehandle and sends the data
+    over a Queue."""
+    def __init__(self, fh, blocksize=1024, discard=False):
+        super(QueueReaderThread, self).__init__()
+        self.fh = fh
+        self.blocksize = blocksize
+        self.daemon = True
+        self.discard = discard
+        self.queue = None if discard else queue.Queue()
+
+    def run(self):
+        while True:
+            data = self.fh.read(self.blocksize)
+            if not self.discard:
+                self.queue.put(data)
+            if not data:
+                break  # Stream closed (EOF).
+
 
 
 class FFmpegAudioFile(object):
@@ -149,7 +180,7 @@ class FFmpegAudioFile(object):
             if 'no such file' in line:
                 raise IOError('file not found')
             elif 'invalid data found' in line:
-                raise UnsupportedError()
+                raise DataError("Invalid data, maybe corrupted, maybe unsupported data.")
             elif 'duration:' in line:
                 out_parts.append(line)
             elif 'audio:' in line:
