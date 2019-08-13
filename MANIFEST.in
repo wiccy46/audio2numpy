@@ -4,3 +4,7 @@ include .coveragerc
 include .pylintrc
 include LICENSE
 include MANIFEST
+
+recursive-include examples *.wav
+recursive-include examples *.mp3
+recursive-include examples *.aif

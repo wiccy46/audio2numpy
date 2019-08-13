@@ -1,21 +1,35 @@
-from distutils.core import setup
+from setuptools import setup
 import os
+import codecs
+from os.path import join
 
 version = {}
+with open(join(project_root, 'pya/version.py')) as read_file:
+    exec(read_file.read(), version)
 
-def _read(fn):
-    path = os.path.join(os.path.dirname(__file__), fn)
-    return open(path).read()
+with open(join(project_root, 'requirements.txt')) as read_file:
+    REQUIRED = read_file.read().splitlines()
+
+with open(join(project_root, 'requirements_test.txt')) as read_file:
+    REQUIRED_TEST = read_file.read().splitlines()
+
+with codecs.open(join(project_root, 'README.md'), 'r', 'utf-8') as f:
+    LONG_DESC = ''.join(f.readlines())
 
 setup(
     name='audio2numpy',
     version=version['__version__'],
     packages=['audio2numpy'],
     license='MIT',
-    author='Jiajun Yang'
-    author_email='thejyang@gmail.com'
-    long_description=_read('README.md'),
+    author='Jiajun Yang',
+    author_email='thejyang@gmail.com',
+    install_requires=REQUIRED,
+    tests_require=REQUIRED_TEST,
+    long_description=LONG_DESC,
     keywords=['audio, audio reader'],
     url='https://github.com/wiccy46/audio2numpy',
-
+    classifiers=[
+        'Topic :: Multimedia :: Sound/Audio :: Conversion',
+        'Programming Language :: Python :: 3.7',
+    ],
 )
