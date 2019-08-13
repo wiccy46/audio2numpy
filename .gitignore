@@ -1,0 +1,4 @@
+.vscode
+__pycache__/
+audio2numpy/__pycache__/
+test/__pycache__/
