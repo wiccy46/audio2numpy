@@ -32,6 +32,6 @@ script: nosetests --with-coverage --with-doctest
 after_success:
 - coveralls --config_file .coveragerc
 addons:
-apt:
-packages:
-- graphviz
+  apt:
+    packages:
+      - ffmpeg
