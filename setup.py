@@ -31,6 +31,7 @@ setup(
     keywords=['audio, audio reader'],
     url='https://github.com/wiccy46/audio2numpy',
     classifiers=[
+        'Topic :: Multimedia :: Sound/Audio',
         'Topic :: Multimedia :: Sound/Audio :: Conversion',
         'Programming Language :: Python :: 3.7',
     ],
