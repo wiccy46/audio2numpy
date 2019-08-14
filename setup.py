@@ -6,7 +6,7 @@ from os.path import join
 project_root = os.path.dirname(os.path.abspath(__file__))
 
 version = {}
-with open(join(project_root, 'pya/version.py')) as read_file:
+with open(join(project_root, 'audio2numpy/version.py')) as read_file:
     exec(read_file.read(), version)
 
 with open(join(project_root, 'requirements.txt')) as read_file:

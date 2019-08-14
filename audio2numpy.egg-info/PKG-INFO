@@ -1,0 +1,18 @@
+Metadata-Version: 1.1
+Name: audio2numpy
+Version: 0.1
+Summary: UNKNOWN
+Home-page: https://github.com/wiccy46/audio2numpy
+Author: Jiajun Yang
+Author-email: thejyang@gmail.com
+License: MIT
+Description: # audio2numpy
+        
+        ## Description
+        
+        audio2numpy load an audio file and directly ouputs the audio data as a numpy array and its sampling rate. 
+Keywords: audio, audio reader
+Platform: UNKNOWN
+Classifier: Topic :: Multimedia :: Sound/Audio
+Classifier: Topic :: Multimedia :: Sound/Audio :: Conversion
+Classifier: Programming Language :: Python :: 3.7

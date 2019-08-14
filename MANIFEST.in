@@ -1,10 +1,8 @@
+include *.in
 include *.md
 include *.txt
-include .coveragerc
-include .pylintrc
 include LICENSE
-include MANIFEST
-
-recursive-include examples *.wav
-recursive-include examples *.mp3
 recursive-include examples *.aif
+recursive-include examples *.mp3
+recursive-include examples *.wav
+recursive-include test *.py
