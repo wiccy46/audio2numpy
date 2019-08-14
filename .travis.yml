@@ -10,7 +10,7 @@ addons:
             - ffmpeg
 
 install:
-  - python setup.py install
+  - pip install tox
 
 script:
   - tox -v -e py
