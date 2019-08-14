@@ -22,6 +22,7 @@ setup(
     name='audio2numpy',
     version=version['__version__'],
     packages=['audio2numpy'],
+    description='Load audio file to numpy array',
     license='MIT',
     author='Jiajun Yang',
     author_email='thejyang@gmail.com',
