@@ -2,6 +2,7 @@ include *.in
 include *.md
 include *.txt
 include LICENSE
+include tox.ini
 recursive-include examples *.aif
 recursive-include examples *.mp3
 recursive-include examples *.wav

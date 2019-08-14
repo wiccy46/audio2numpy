@@ -28,6 +28,7 @@ setup(
     install_requires=REQUIRED,
     tests_require=REQUIRED_TEST,
     long_description=LONG_DESC,
+    long_description_content_type="text/markdown",
     keywords=['audio, audio reader'],
     url='https://github.com/wiccy46/audio2numpy',
     classifiers=[
