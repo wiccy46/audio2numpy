@@ -1,4 +1,5 @@
 # audio2numpy
+[![Build Status](https://travis-ci.com/wiccy46/audio2numpy.svg?branch=master)](https://travis-ci.com/wiccy46/audio2numpy)
 
 ## Description
 
