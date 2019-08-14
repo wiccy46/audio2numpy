@@ -1,0 +1,16 @@
+language: python
+
+python:
+  - "3.6"
+  - "3.7"
+
+addons:
+    apt:
+        packages:
+            - ffmpeg
+
+install:
+  - python setup.py install
+
+script:
+  - tox -v -e py
