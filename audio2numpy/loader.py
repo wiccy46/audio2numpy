@@ -50,7 +50,11 @@ def _audio_read(path):
             pass
     else:
         raise AudioFormatError("Only support mp3, wav, aiff formats.")
-    raise NoBackendError()
+    msg = """It is likely that ffmpeg is not yet installed. Please refer github repo for instruction. 
+    MacOS: brew install ffmpeg.
+    Linux: sudo apt-get install ffmpeg
+    Windows: Download distribution from ffmpeg website, unzip, add the path of bin (e.g. `C:\ffmpeg\bin`) to system PATH."""
+    raise NoBackendError(msg)
 
 
 def audio_from_file(path, offset=0, duration=None, dtype=np.float32):
