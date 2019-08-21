@@ -24,23 +24,23 @@ python3 setup.py sdist bdist_wheel
 ```
 twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 ```
-* [Check](https://test.pypi.org/project/pya/) the test project page 
+* [Check](https://test.pypi.org/project/audio2numpy/) the test project page 
 
 * Test install uploaded release
 ```
-pip3 install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple pya
+pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple audio2numpy
 ```
 * Upload the official release
 ```
 twine upload dist/*
 ```
-* [Check](https://pypi.org/project/pya/) the public project page 
+* [Check](https://pypi.org/project/audio2numpy/) the public project page 
 
 * Test install uploaded release
 ```
-pip install pya
+pip install audio2numpy
 ```
-* Draft a release on [Github](https://github.com/thomas-hermann/pya/releases)
+* Draft a release on [Github](https://github.com/wiccy46/audio2numpy/releases)
 
 ## Further Readings 
 
