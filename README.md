@@ -26,6 +26,9 @@ audio2numpy requires ffmpeg to decode mp3 files. You would need to install ffmpe
 - Unzip the folder, preferably to `C:\`
 - Append the FFmpeg binary folder (e.g. `C:\ffmpeg\bin`) to the PATH system variable ([How do I set or change the PATH system variable?](https://www.java.com/en/download/help/path.xml))
 
+### Colab
+    !apt install ffmpeg
+
 ## Usage
 
     from audio2numpy import open_audio
@@ -33,6 +36,10 @@ audio2numpy requires ffmpeg to decode mp3 files. You would need to install ffmpe
     signal, sampling_rate = open_audio(fp)
 
 ## Version History
+
+**0.1.3 (17.10.2019)**
+  - Add Colab ffmpeg installation guide. 
+  - Remove ffmpeg from requirements.txt. Users should install it separately 
 
 **0.1.2 (20.08.2019)**
 
