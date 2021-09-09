@@ -43,13 +43,11 @@ def _audio_read(path):
             return RawAudioFile(path)
         except DecodeError:
             pass
-    elif path.endswith(".mp3"):
+    else:
         try:
             return FFmpegAudioFile(path)
         except DecodeError:
             pass
-    else:
-        raise AudioFormatError("Only support mp3, wav, aiff formats.")
     msg = """It is likely that ffmpeg is not yet installed. Please refer github repo for instruction. 
     MacOS: brew install ffmpeg.
     Linux: sudo apt-get install ffmpeg
